@@ -20,6 +20,14 @@ import (
 	"kubevirt.io/containerdisks/pkg/docs"
 )
 
+const (
+	almalinuxUser = "almalinux"
+	cloudUser     = "cloud-user"
+	debianUser    = "debian"
+	cirrosName    = "cirros"
+	cirrosVersion = "6.1"
+)
+
 type Entry struct {
 	Artifacts          []api.Artifact
 	UseForDocs         bool
@@ -30,33 +38,33 @@ type Entry struct {
 var staticRegistry = []Entry{
 	{
 		Artifacts: []api.Artifact{
-			almalinux.New("10", "x86_64", &docs.UserData{Username: "almalinux"}, defaultEnvVariables("u1.medium", "rhel.10")),
-			almalinux.New("10", "aarch64", &docs.UserData{Username: "almalinux"}, defaultEnvVariables("u1.medium", "rhel.10")),
-			almalinux.New("10", "s390x", &docs.UserData{Username: "almalinux"}, defaultEnvVariables("u1.medium", "rhel.10")),
+			almalinux.New("10", "x86_64", &docs.UserData{Username: almalinuxUser}, defaultEnvVariables("u1.medium", "rhel.10")),
+			almalinux.New("10", "aarch64", &docs.UserData{Username: almalinuxUser}, defaultEnvVariables("u1.medium", "rhel.10")),
+			almalinux.New("10", "s390x", &docs.UserData{Username: almalinuxUser}, defaultEnvVariables("u1.medium", "rhel.10")),
 		},
 		UseForDocs: true,
 	},
 	{
 		Artifacts: []api.Artifact{
-			almalinux.New("9", "x86_64", &docs.UserData{Username: "almalinux"}, defaultEnvVariables("u1.medium", "rhel.9")),
-			almalinux.New("9", "aarch64", &docs.UserData{Username: "almalinux"}, defaultEnvVariables("u1.medium", "rhel.9")),
-			almalinux.New("9", "s390x", &docs.UserData{Username: "almalinux"}, defaultEnvVariables("u1.medium", "rhel.9")),
+			almalinux.New("9", "x86_64", &docs.UserData{Username: almalinuxUser}, defaultEnvVariables("u1.medium", "rhel.9")),
+			almalinux.New("9", "aarch64", &docs.UserData{Username: almalinuxUser}, defaultEnvVariables("u1.medium", "rhel.9")),
+			almalinux.New("9", "s390x", &docs.UserData{Username: almalinuxUser}, defaultEnvVariables("u1.medium", "rhel.9")),
 		},
 		UseForDocs: true,
 	},
 	{
 		Artifacts: []api.Artifact{
-			centosstream.New("10", "x86_64", &docs.UserData{Username: "cloud-user"}, defaultEnvVariables("u1.medium", "centos.stream10")),
-			centosstream.New("10", "aarch64", &docs.UserData{Username: "cloud-user"}, defaultEnvVariables("u1.medium", "centos.stream10")),
-			centosstream.New("10", "s390x", &docs.UserData{Username: "cloud-user"}, defaultEnvVariables("u1.medium", "centos.stream10")),
+			centosstream.New("10", "x86_64", &docs.UserData{Username: cloudUser}, defaultEnvVariables("u1.medium", "centos.stream10")),
+			centosstream.New("10", "aarch64", &docs.UserData{Username: cloudUser}, defaultEnvVariables("u1.medium", "centos.stream10")),
+			centosstream.New("10", "s390x", &docs.UserData{Username: cloudUser}, defaultEnvVariables("u1.medium", "centos.stream10")),
 		},
 		UseForDocs: true,
 	},
 	{
 		Artifacts: []api.Artifact{
-			centosstream.New("9", "x86_64", &docs.UserData{Username: "cloud-user"}, defaultEnvVariables("u1.medium", "centos.stream9")),
-			centosstream.New("9", "aarch64", &docs.UserData{Username: "cloud-user"}, defaultEnvVariables("u1.medium", "centos.stream9")),
-			centosstream.New("9", "s390x", &docs.UserData{Username: "cloud-user"}, defaultEnvVariables("u1.medium", "centos.stream9")),
+			centosstream.New("9", "x86_64", &docs.UserData{Username: cloudUser}, defaultEnvVariables("u1.medium", "centos.stream9")),
+			centosstream.New("9", "aarch64", &docs.UserData{Username: cloudUser}, defaultEnvVariables("u1.medium", "centos.stream9")),
+			centosstream.New("9", "s390x", &docs.UserData{Username: cloudUser}, defaultEnvVariables("u1.medium", "centos.stream9")),
 		},
 		UseForDocs: true,
 	},
@@ -136,20 +144,20 @@ var staticRegistry = []Entry{
 	},
 	{
 		Artifacts: []api.Artifact{
-			debian.New("11", "bullseye", "x86_64", &docs.UserData{Username: "debian"}, defaultEnvVariables("u1.medium", "debian")),
-			debian.New("11", "bullseye", "aarch64", &docs.UserData{Username: "debian"}, defaultEnvVariables("u1.medium", "debian")),
+			debian.New("11", "bullseye", "x86_64", &docs.UserData{Username: debianUser}, defaultEnvVariables("u1.medium", "debian")),
+			debian.New("11", "bullseye", "aarch64", &docs.UserData{Username: debianUser}, defaultEnvVariables("u1.medium", "debian")),
 		},
 	},
 	{
 		Artifacts: []api.Artifact{
-			debian.New("12", "bookworm", "x86_64", &docs.UserData{Username: "debian"}, defaultEnvVariables("u1.medium", "debian")),
-			debian.New("12", "bookworm", "aarch64", &docs.UserData{Username: "debian"}, defaultEnvVariables("u1.medium", "debian")),
+			debian.New("12", "bookworm", "x86_64", &docs.UserData{Username: debianUser}, defaultEnvVariables("u1.medium", "debian")),
+			debian.New("12", "bookworm", "aarch64", &docs.UserData{Username: debianUser}, defaultEnvVariables("u1.medium", "debian")),
 		},
 	},
 	{
 		Artifacts: []api.Artifact{
-			debian.New("13", "trixie", "x86_64", &docs.UserData{Username: "debian"}, defaultEnvVariables("u1.medium", "debian")),
-			debian.New("13", "trixie", "aarch64", &docs.UserData{Username: "debian"}, defaultEnvVariables("u1.medium", "debian")),
+			debian.New("13", "trixie", "x86_64", &docs.UserData{Username: debianUser}, defaultEnvVariables("u1.medium", "debian")),
+			debian.New("13", "trixie", "aarch64", &docs.UserData{Username: debianUser}, defaultEnvVariables("u1.medium", "debian")),
 		},
 		UseForDocs:   true,
 		UseForLatest: true,
@@ -165,8 +173,8 @@ var staticRegistry = []Entry{
 					ImageArchitecture: "amd64",
 				},
 				&api.Metadata{
-					Name:    "cirros",
-					Version: "6.1",
+					Name:    cirrosName,
+					Version: cirrosVersion,
 				},
 			),
 			generic.New(
@@ -177,8 +185,8 @@ var staticRegistry = []Entry{
 					ImageArchitecture: "arm64",
 				},
 				&api.Metadata{
-					Name:    "cirros",
-					Version: "6.1",
+					Name:    cirrosName,
+					Version: cirrosVersion,
 				},
 			),
 		},

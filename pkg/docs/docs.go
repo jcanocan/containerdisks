@@ -29,6 +29,12 @@ type UserData struct {
 	AuthorizedKeys []string
 }
 
+const (
+	containerDiskVolume = "containerdisk"
+	cloudInitVolume     = "cloudinit"
+	virtioBus           = "virtio"
+)
+
 type Option func(vm *v1.VirtualMachine)
 
 //go:embed data/cloudinit.tpl
@@ -74,10 +80,10 @@ func BasicVM(name, image string) *v1.VirtualMachine {
 						Devices: v1.Devices{
 							Disks: []v1.Disk{
 								{
-									Name: "containerdisk",
+									Name: containerDiskVolume,
 									DiskDevice: v1.DiskDevice{
 										Disk: &v1.DiskTarget{
-											Bus: "virtio",
+											Bus: virtioBus,
 										},
 									},
 								},
@@ -86,7 +92,7 @@ func BasicVM(name, image string) *v1.VirtualMachine {
 					},
 					Volumes: []v1.Volume{
 						{
-							Name: "containerdisk",
+							Name: containerDiskVolume,
 							VolumeSource: v1.VolumeSource{
 								ContainerDisk: &v1.ContainerDiskSource{
 									Image: image,
@@ -111,10 +117,10 @@ func withCloudInit(volumeSource v1.VolumeSource) Option {
 		vm.Spec.Template.Spec.Domain.Devices.Disks = append(
 			vm.Spec.Template.Spec.Domain.Devices.Disks,
 			v1.Disk{
-				Name: "cloudinit",
+				Name: cloudInitVolume,
 				DiskDevice: v1.DiskDevice{
 					Disk: &v1.DiskTarget{
-						Bus: "virtio",
+						Bus: virtioBus,
 					},
 				},
 			},

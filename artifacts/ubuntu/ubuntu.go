@@ -24,6 +24,8 @@ type ubuntu struct {
 	EnvVariables map[string]string
 }
 
+const imageName = "ubuntu"
+
 const description = `Ubuntu images for KubeVirt.
 <br />
 <br />
@@ -31,11 +33,11 @@ Visit [ubuntu.com](https://ubuntu.com/) to learn more about Ubuntu.`
 
 func (u *ubuntu) Metadata() *api.Metadata {
 	return &api.Metadata{
-		Name:        "ubuntu",
+		Name:        imageName,
 		Version:     u.Version,
 		Description: description,
 		ExampleUserData: docs.UserData{
-			Username: "ubuntu",
+			Username: imageName,
 		},
 		EnvVariables: u.EnvVariables,
 		Arch:         u.Arch,

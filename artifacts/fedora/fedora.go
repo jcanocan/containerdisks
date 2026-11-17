@@ -56,6 +56,8 @@ const (
 	amd64Arch      = "x86_64"
 	arm64Arch      = "aarch64"
 	s390xArch      = "s390x"
+	imageName      = "fedora"
+	cloudVariant   = "Cloud"
 )
 
 //nolint:lll
@@ -68,11 +70,11 @@ var additionalUniqueTagRegExp = regexp.MustCompile(`\d+-\d+\.\d+`)
 
 func (f *fedora) Metadata() *api.Metadata {
 	return &api.Metadata{
-		Name:        "fedora",
+		Name:        imageName,
 		Version:     f.Version,
 		Description: description,
 		ExampleUserData: docs.UserData{
-			Username: "fedora",
+			Username: imageName,
 		},
 		EnvVariables: f.EnvVariables,
 		Arch:         f.Arch,
@@ -296,7 +298,7 @@ func New(release, arch string) *fedora {
 		Version:        NormalizeVersion(release),
 		ReleaseVersion: release,
 		Arch:           arch,
-		Variant:        "Cloud",
+		Variant:        cloudVariant,
 		getter:         &http.HTTPGetter{},
 	}
 	f.setEnvVariables()

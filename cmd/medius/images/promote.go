@@ -16,7 +16,7 @@ import (
 
 func NewPromoteImagesCommand(options *common.Options) *cobra.Command {
 	options.PromoteImageOptions = common.PromoteImageOptions{
-		TargetRegistry: "quay.io/containerdisks",
+		TargetRegistry: defaultRegistry,
 	}
 
 	promoteCmd := &cobra.Command{

@@ -23,6 +23,8 @@ import (
 	"kubevirt.io/containerdisks/pkg/repository"
 )
 
+const defaultRegistry = "quay.io/containerdisks"
+
 type buildAndPublish struct {
 	Ctx     context.Context
 	Log     *logrus.Entry
@@ -33,7 +35,7 @@ type buildAndPublish struct {
 
 func NewPublishImagesCommand(options *common.Options) *cobra.Command {
 	options.PublishImagesOptions = common.PublishImageOptions{
-		SourceRegistry: "quay.io/containerdisks",
+		SourceRegistry: defaultRegistry,
 	}
 
 	publishCmd := &cobra.Command{

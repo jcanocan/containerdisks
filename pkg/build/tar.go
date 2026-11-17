@@ -55,6 +55,8 @@ func StreamLayerOpener(imagePath string) func() (io.ReadCloser, error) {
 	}
 }
 
+const qemuUser = "qemu"
+
 func addFileToTarWriter(file io.Reader, stat os.FileInfo, modTime time.Time, tarWriter *tar.Writer) error {
 	header := &tar.Header{
 		Typeflag: tar.TypeDir,
@@ -62,8 +64,8 @@ func addFileToTarWriter(file io.Reader, stat os.FileInfo, modTime time.Time, tar
 		Mode:     0o555,
 		Uid:      107,
 		Gid:      107,
-		Uname:    "qemu",
-		Gname:    "qemu",
+		Uname:    qemuUser,
+		Gname:    qemuUser,
 		ModTime:  modTime,
 	}
 
@@ -76,8 +78,8 @@ func addFileToTarWriter(file io.Reader, stat os.FileInfo, modTime time.Time, tar
 		Typeflag: tar.TypeReg,
 		Uid:      107,
 		Gid:      107,
-		Uname:    "qemu",
-		Gname:    "qemu",
+		Uname:    qemuUser,
+		Gname:    qemuUser,
 		Name:     "disk/disk.img",
 		Size:     stat.Size(),
 		Mode:     0o444,
